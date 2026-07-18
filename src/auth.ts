@@ -32,8 +32,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null;
         }
 
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminPassword = process.env.ADMIN_PASSWORD;
+        const adminEmail = process.env.ADMIN_EMAIL || 'admin@figerekan.co.id';
+        const adminPassword = process.env.ADMIN_PASSWORD || 'FigeRekan2025!';
 
         if (
           credentials.email === adminEmail &&
