@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
+
+export const dynamic = 'force-dynamic';
 import { getMessages, createMessage } from '@/lib/db';
 import { generateId } from '@/lib/utils';
 import { ContactMessage } from '@/lib/types';

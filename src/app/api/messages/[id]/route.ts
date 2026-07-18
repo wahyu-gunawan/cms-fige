@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
+
+export const dynamic = 'force-dynamic';
 import { markMessageAsRead, deleteMessage } from '@/lib/db';
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {

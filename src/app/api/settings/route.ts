@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
+
+export const dynamic = 'force-dynamic';
 import { getSettings, updateSettings } from '@/lib/db';
 
 export async function GET(req: Request) {

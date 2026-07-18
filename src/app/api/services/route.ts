@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
+
+export const dynamic = 'force-dynamic';
 import { getServices, getPublishedServices, createService } from '@/lib/db';
 import { generateId, generateSlug } from '@/lib/utils';
 import { Service } from '@/lib/types';
