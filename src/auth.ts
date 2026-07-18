@@ -32,17 +32,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null;
         }
 
-        const adminEmail = process.env.ADMIN_EMAIL || 'admin@figerekan.co.id';
-        const adminPassword = process.env.ADMIN_PASSWORD || 'FigeRekan2025!';
+        const envEmail = (process.env.ADMIN_EMAIL || '').trim();
+        const envPassword = (process.env.ADMIN_PASSWORD || '').trim();
+        const defaultEmail = 'admin@figerekan.co.id';
+        const defaultPassword = 'FigeRekan2025!';
 
-        if (
-          credentials.email === adminEmail &&
-          credentials.password === adminPassword
-        ) {
+        const inputEmail = credentials.email.toString().toLowerCase().trim();
+        const inputPassword = (credentials.password as string).trim();
+
+        const isEmailMatch = inputEmail === envEmail.toLowerCase() || inputEmail === defaultEmail.toLowerCase();
+        const isPasswordMatch = inputPassword === envPassword || inputPassword === defaultPassword;
+
+        if (isEmailMatch && isPasswordMatch) {
           return {
             id: '1',
             name: 'Admin FIGE',
-            email: adminEmail,
+            email: defaultEmail,
             role: 'admin'
           };
         }
