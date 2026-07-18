@@ -73,5 +73,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: '/admin/login',
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || 'fige-rekan-secret-key-change-in-production-2025',
 });
