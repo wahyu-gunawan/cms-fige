@@ -12,7 +12,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const { data: session, status } = useSession();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const isLoginPage = pathname.replace(/\/$/, '') === '/admin/login';
+  const isLoginPage = pathname.includes('/admin/login');
 
   useEffect(() => {
     if (status === 'unauthenticated' && !isLoginPage) {
