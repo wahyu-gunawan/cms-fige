@@ -11,24 +11,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter();
   const { data: session, status } = useSession();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const isLoginPage = pathname === '/admin/login';
 
-  if (!mounted) return null;
+  useEffect(() => {
+    if (status === 'unauthenticated' && !isLoginPage) {
+      router.push('/admin/login');
+    }
+  }, [status, isLoginPage, router]);
+
+  if (status === 'loading') {
+    return <div className="admin-body" style={{ padding: '2rem', color: '#fff' }}>Memuat...</div>;
+  }
 
   if (isLoginPage) {
     return <div className="admin-body">{children}</div>;
   }
 
-  // Very basic check, middleware should handle actual protection
   if (status === 'unauthenticated') {
-    router.push('/admin/login');
-    return null;
+    return <div className="admin-body" style={{ padding: '2rem', color: '#fff' }}>Mengalihkan...</div>;
   }
 
   const navItems = [
