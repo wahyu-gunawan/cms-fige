@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getPublishedTeamMembers } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Tim Advokat | Kantor Hukum FIGE & Rekan',
   description: 'Mengenal tim advokat dan konsultan hukum dari Kantor Hukum FIGE & Rekan',

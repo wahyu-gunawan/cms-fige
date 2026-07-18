@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { getTeamMemberBySlug } from '@/lib/db';
 import { simpleMarkdown } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const member = await getTeamMemberBySlug(slug);

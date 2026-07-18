@@ -3,6 +3,8 @@ import StatsCounter from '@/components/StatsCounter';
 import { getSettings, getPublishedServices, getPublishedArticles } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const settings = await getSettings();
   const services = await getPublishedServices();

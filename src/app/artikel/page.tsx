@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { getPublishedArticles } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Artikel & Informasi Hukum | Kantor Hukum FIGE & Rekan',
   description: 'Artikel, berita, dan pandangan hukum terbaru dari tim advokat FIGE & Rekan',

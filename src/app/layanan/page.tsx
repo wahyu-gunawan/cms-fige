@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getPublishedServices } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Layanan Kami | Kantor Hukum FIGE & Rekan',
   description: 'Berbagai layanan hukum dari Kantor Hukum FIGE & Rekan',
