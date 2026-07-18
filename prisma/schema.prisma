@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id        String   @id
+  title     String
+  slug      String   @unique
+  excerpt   String
+  content   String
+  category  String
+  image     String
+  author    String
+  published Boolean
+  createdAt DateTime
+  updatedAt DateTime
+}
+
+model Service {
+  id          String  @id
+  title       String
+  slug        String  @unique
+  description String
+  content     String
+  icon        String
+  order       Int
+  published   Boolean
+}
+
+model TeamMember {
+  id             String   @id
+  name           String
+  slug           String   @unique
+  position       String
+  specialization String
+  bio            String
+  education      String[]
+  experience     String[]
+  image          String
+  email          String
+  order          Int
+  published      Boolean
+}
+
+model ContactMessage {
+  id        String   @id
+  name      String
+  email     String
+  phone     String
+  subject   String
+  message   String
+  read      Boolean
+  createdAt DateTime
+}
+
+model SiteSettings {
+  id                 String @id @default("default")
+  siteName           String
+  tagline            String
+  description        String
+  address            String
+  phone              String
+  email              String
+  whatsapp           String
+  instagram          String
+  facebook           String
+  heroTitle          String
+  heroSubtitle       String
+  yearsExperience    Int
+  casesHandled       Int
+  clientSatisfaction Int
+}

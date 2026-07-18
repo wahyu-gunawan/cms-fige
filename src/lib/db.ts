@@ -1,202 +1,261 @@
-import fs from 'fs';
-import path from 'path';
+import { PrismaClient } from '@prisma/client';
 import { Article, Service, TeamMember, ContactMessage, SiteSettings } from './types';
 
-const dataDir = path.join(process.cwd(), 'data');
+// Use global pattern to prevent multiple instances in development
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
 
-function readJSON<T>(filename: string): T {
-  const filePath = path.join(dataDir, filename);
-  if (!fs.existsSync(filePath)) {
-    return (filename.endsWith('.json') && !filename.includes('settings') ? [] : {}) as T;
-  }
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(raw) as T;
-}
+export const prisma = globalForPrisma.prisma ?? new PrismaClient();
 
-function writeJSON<T>(filename: string, data: T): void {
-  const filePath = path.join(dataDir, filename);
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-}
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
 // ============================================================
 // Articles
 // ============================================================
-export function getArticles(): Article[] {
-  return readJSON<Article[]>('articles.json');
+export async function getArticles() {
+  return prisma.article.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
 }
 
-export function getPublishedArticles(): Article[] {
-  return getArticles().filter((a) => a.published).sort((a, b) =>
-    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+export async function getPublishedArticles() {
+  return prisma.article.findMany({
+    where: { published: true },
+    orderBy: { createdAt: 'desc' }
+  });
 }
 
-export function getArticleBySlug(slug: string): Article | undefined {
-  return getArticles().find((a) => a.slug === slug);
+export async function getArticleBySlug(slug: string) {
+  return prisma.article.findUnique({
+    where: { slug }
+  });
 }
 
-export function getArticleById(id: string): Article | undefined {
-  return getArticles().find((a) => a.id === id);
+export async function getArticleById(id: string) {
+  return prisma.article.findUnique({
+    where: { id }
+  });
 }
 
-export function createArticle(article: Article): Article {
-  const articles = getArticles();
-  articles.push(article);
-  writeJSON('articles.json', articles);
-  return article;
+export async function createArticle(article: Article) {
+  const { createdAt, updatedAt, ...rest } = article;
+  return prisma.article.create({
+    data: {
+      ...rest,
+      createdAt: new Date(createdAt),
+      updatedAt: new Date(updatedAt)
+    }
+  });
 }
 
-export function updateArticle(id: string, updates: Partial<Article>): Article | null {
-  const articles = getArticles();
-  const index = articles.findIndex((a) => a.id === id);
-  if (index === -1) return null;
-  articles[index] = { ...articles[index], ...updates, updatedAt: new Date().toISOString() };
-  writeJSON('articles.json', articles);
-  return articles[index];
+export async function updateArticle(id: string, updates: Partial<Article>) {
+  const data: any = { ...updates };
+  if (updates.createdAt) data.createdAt = new Date(updates.createdAt);
+  if (updates.updatedAt) data.updatedAt = new Date(updates.updatedAt);
+  
+  return prisma.article.update({
+    where: { id },
+    data
+  });
 }
 
-export function deleteArticle(id: string): boolean {
-  const articles = getArticles();
-  const filtered = articles.filter((a) => a.id !== id);
-  if (filtered.length === articles.length) return false;
-  writeJSON('articles.json', filtered);
-  return true;
+export async function deleteArticle(id: string) {
+  return prisma.article.delete({
+    where: { id }
+  });
 }
 
 // ============================================================
 // Services
 // ============================================================
-export function getServices(): Service[] {
-  return readJSON<Service[]>('services.json');
+export async function getServices() {
+  return prisma.service.findMany({
+    orderBy: { order: 'asc' }
+  });
 }
 
-export function getPublishedServices(): Service[] {
-  return getServices().filter((s) => s.published).sort((a, b) => a.order - b.order);
+export async function getPublishedServices() {
+  return prisma.service.findMany({
+    where: { published: true },
+    orderBy: { order: 'asc' }
+  });
 }
 
-export function getServiceBySlug(slug: string): Service | undefined {
-  return getServices().find((s) => s.slug === slug);
+export async function getServiceBySlug(slug: string) {
+  return prisma.service.findUnique({
+    where: { slug }
+  });
 }
 
-export function getServiceById(id: string): Service | undefined {
-  return getServices().find((s) => s.id === id);
+export async function getServiceById(id: string) {
+  return prisma.service.findUnique({
+    where: { id }
+  });
 }
 
-export function createService(service: Service): Service {
-  const services = getServices();
-  services.push(service);
-  writeJSON('services.json', services);
-  return service;
+export async function createService(service: Service) {
+  return prisma.service.create({
+    data: service
+  });
 }
 
-export function updateService(id: string, updates: Partial<Service>): Service | null {
-  const services = getServices();
-  const index = services.findIndex((s) => s.id === id);
-  if (index === -1) return null;
-  services[index] = { ...services[index], ...updates };
-  writeJSON('services.json', services);
-  return services[index];
+export async function updateService(id: string, updates: Partial<Service>) {
+  return prisma.service.update({
+    where: { id },
+    data: updates
+  });
 }
 
-export function deleteService(id: string): boolean {
-  const services = getServices();
-  const filtered = services.filter((s) => s.id !== id);
-  if (filtered.length === services.length) return false;
-  writeJSON('services.json', filtered);
-  return true;
+export async function deleteService(id: string) {
+  return prisma.service.delete({
+    where: { id }
+  });
 }
 
 // ============================================================
 // Team Members
 // ============================================================
-export function getTeamMembers(): TeamMember[] {
-  return readJSON<TeamMember[]>('team.json');
+export async function getTeamMembers() {
+  return prisma.teamMember.findMany({
+    orderBy: { order: 'asc' }
+  });
 }
 
-export function getPublishedTeamMembers(): TeamMember[] {
-  return getTeamMembers().filter((t) => t.published).sort((a, b) => a.order - b.order);
+export async function getPublishedTeamMembers() {
+  return prisma.teamMember.findMany({
+    where: { published: true },
+    orderBy: { order: 'asc' }
+  });
 }
 
-export function getTeamMemberBySlug(slug: string): TeamMember | undefined {
-  return getTeamMembers().find((t) => t.slug === slug);
+export async function getTeamMemberBySlug(slug: string) {
+  return prisma.teamMember.findUnique({
+    where: { slug }
+  });
 }
 
-export function getTeamMemberById(id: string): TeamMember | undefined {
-  return getTeamMembers().find((t) => t.id === id);
+export async function getTeamMemberById(id: string) {
+  return prisma.teamMember.findUnique({
+    where: { id }
+  });
 }
 
-export function createTeamMember(member: TeamMember): TeamMember {
-  const members = getTeamMembers();
-  members.push(member);
-  writeJSON('team.json', members);
-  return member;
+export async function createTeamMember(member: TeamMember) {
+  return prisma.teamMember.create({
+    data: member
+  });
 }
 
-export function updateTeamMember(id: string, updates: Partial<TeamMember>): TeamMember | null {
-  const members = getTeamMembers();
-  const index = members.findIndex((t) => t.id === id);
-  if (index === -1) return null;
-  members[index] = { ...members[index], ...updates };
-  writeJSON('team.json', members);
-  return members[index];
+export async function updateTeamMember(id: string, updates: Partial<TeamMember>) {
+  return prisma.teamMember.update({
+    where: { id },
+    data: updates
+  });
 }
 
-export function deleteTeamMember(id: string): boolean {
-  const members = getTeamMembers();
-  const filtered = members.filter((t) => t.id !== id);
-  if (filtered.length === members.length) return false;
-  writeJSON('team.json', filtered);
-  return true;
+export async function deleteTeamMember(id: string) {
+  return prisma.teamMember.delete({
+    where: { id }
+  });
 }
 
 // ============================================================
 // Contact Messages
 // ============================================================
-export function getMessages(): ContactMessage[] {
-  return readJSON<ContactMessage[]>('messages.json');
+export async function getMessages() {
+  return prisma.contactMessage.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
 }
 
-export function getUnreadMessages(): ContactMessage[] {
-  return getMessages().filter((m) => !m.read);
+export async function getUnreadMessages() {
+  return prisma.contactMessage.findMany({
+    where: { read: false },
+    orderBy: { createdAt: 'desc' }
+  });
 }
 
-export function createMessage(message: ContactMessage): ContactMessage {
-  const messages = getMessages();
-  messages.push(message);
-  writeJSON('messages.json', messages);
-  return message;
+export async function getMessageById(id: string) {
+  return prisma.contactMessage.findUnique({
+    where: { id }
+  });
 }
 
-export function markMessageAsRead(id: string): boolean {
-  const messages = getMessages();
-  const index = messages.findIndex((m) => m.id === id);
-  if (index === -1) return false;
-  messages[index].read = true;
-  writeJSON('messages.json', messages);
-  return true;
+export async function createMessage(message: Omit<ContactMessage, 'createdAt' | 'read'>) {
+  return prisma.contactMessage.create({
+    data: {
+      ...message,
+      read: false,
+      createdAt: new Date()
+    }
+  });
 }
 
-export function deleteMessage(id: string): boolean {
-  const messages = getMessages();
-  const filtered = messages.filter((m) => m.id !== id);
-  if (filtered.length === messages.length) return false;
-  writeJSON('messages.json', filtered);
-  return true;
+export async function markMessageAsRead(id: string) {
+  return prisma.contactMessage.update({
+    where: { id },
+    data: { read: true }
+  });
+}
+
+export async function deleteMessage(id: string) {
+  return prisma.contactMessage.delete({
+    where: { id }
+  });
 }
 
 // ============================================================
 // Site Settings
 // ============================================================
-export function getSettings(): SiteSettings {
-  return readJSON<SiteSettings>('settings.json');
+export async function getSettings() {
+  const settings = await prisma.siteSettings.findUnique({
+    where: { id: 'default' }
+  });
+  
+  if (!settings) {
+    // Fallback if not seeded yet
+    return {
+      siteName: "Kantor Hukum FIGE & Rekan",
+      tagline: "Advokasi Profesional & Terpercaya",
+      description: "Kami memberikan layanan hukum...",
+      address: "Jl. Sudirman No. 123, Jakarta",
+      phone: "+62 812 3456 7890",
+      email: "info@figerekan.co.id",
+      whatsapp: "+6281234567890",
+      instagram: "@fige.rekan",
+      facebook: "Fige & Rekan",
+      heroTitle: "Keadilan Melalui Profesionalisme",
+      heroSubtitle: "Melindungi hak-hak Anda dengan integritas dan dedikasi tinggi.",
+      yearsExperience: 15,
+      casesHandled: 500,
+      clientSatisfaction: 98
+    } as SiteSettings;
+  }
+  
+  return settings;
 }
 
-export function updateSettings(updates: Partial<SiteSettings>): SiteSettings {
-  const settings = getSettings();
-  const updated = { ...settings, ...updates };
-  writeJSON('settings.json', updated);
-  return updated;
+export async function updateSettings(updates: Partial<SiteSettings>) {
+  return prisma.siteSettings.upsert({
+    where: { id: 'default' },
+    update: updates,
+    create: {
+      id: 'default',
+      siteName: updates.siteName || "",
+      tagline: updates.tagline || "",
+      description: updates.description || "",
+      address: updates.address || "",
+      phone: updates.phone || "",
+      email: updates.email || "",
+      whatsapp: updates.whatsapp || "",
+      instagram: updates.instagram || "",
+      facebook: updates.facebook || "",
+      heroTitle: updates.heroTitle || "",
+      heroSubtitle: updates.heroSubtitle || "",
+      yearsExperience: updates.yearsExperience || 0,
+      casesHandled: updates.casesHandled || 0,
+      clientSatisfaction: updates.clientSatisfaction || 0
+    }
+  });
 }
