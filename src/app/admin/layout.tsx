@@ -16,9 +16,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     if (status === 'unauthenticated' && !isLoginPage) {
-      router.push('/admin/login');
+      window.location.href = '/admin/login';
     }
-  }, [status, isLoginPage, router]);
+  }, [status, isLoginPage]);
 
   if (status === 'loading') {
     return <div className="admin-body" style={{ padding: '2rem', color: '#fff' }}>Memuat...</div>;
@@ -48,7 +48,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
-    router.push('/admin/login');
+    window.location.href = '/admin/login';
   };
 
   return (
