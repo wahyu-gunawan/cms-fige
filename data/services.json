@@ -1,0 +1,62 @@
+[
+  {
+    "id": "svc-001",
+    "title": "Hukum Pidana",
+    "slug": "hukum-pidana",
+    "description": "Pendampingan dan pembelaan dalam perkara pidana, mulai dari tahap penyelidikan hingga proses persidangan di pengadilan.",
+    "content": "Kantor Hukum FIGE & Rekan menyediakan layanan hukum pidana yang komprehensif. Tim advokat kami berpengalaman dalam menangani berbagai kasus pidana termasuk:\n\n- Pendampingan tersangka/terdakwa di kepolisian dan kejaksaan\n- Pembelaan di persidangan pengadilan negeri hingga Mahkamah Agung\n- Kasus tindak pidana umum (penipuan, penggelapan, pencurian)\n- Kasus tindak pidana khusus (korupsi, narkotika, perbankan)\n- Perlindungan saksi dan korban\n- Praperadilan dan upaya hukum luar biasa\n\nKami memastikan hak-hak klien kami terlindungi sepenuhnya sesuai dengan ketentuan hukum yang berlaku.",
+    "icon": "⚖️",
+    "order": 1,
+    "published": true
+  },
+  {
+    "id": "svc-002",
+    "title": "Hukum Perdata",
+    "slug": "hukum-perdata",
+    "description": "Penanganan sengketa perdata meliputi wanprestasi, perbuatan melawan hukum, dan gugatan ganti rugi.",
+    "content": "Layanan hukum perdata kami mencakup penanganan berbagai jenis sengketa perdata:\n\n- Gugatan wanprestasi dan perbuatan melawan hukum\n- Sengketa tanah dan properti\n- Gugatan ganti rugi materiil dan immateriil\n- Eksekusi putusan pengadilan\n- Somasi dan negosiasi penyelesaian sengketa\n- Mediasi dan arbitrase\n\nTim advokat kami akan mendampingi Anda dari tahap konsultasi awal hingga putusan berkekuatan hukum tetap.",
+    "icon": "📋",
+    "order": 2,
+    "published": true
+  },
+  {
+    "id": "svc-003",
+    "title": "Hukum Bisnis & Korporasi",
+    "slug": "hukum-bisnis-korporasi",
+    "description": "Konsultasi dan pendampingan hukum untuk perusahaan, termasuk pendirian PT, perizinan, dan kontrak bisnis.",
+    "content": "Kami menyediakan layanan hukum bisnis dan korporasi yang lengkap:\n\n- Pendirian badan usaha (PT, CV, Firma, Yayasan)\n- Penyusunan dan review kontrak bisnis\n- Perizinan usaha dan compliance\n- Merger, akuisisi, dan restrukturisasi perusahaan\n- Hukum pasar modal dan investasi\n- Perlindungan Hak Kekayaan Intelektual (HKI)\n- Legal due diligence\n- Legal opinion dan legal audit\n\nKami membantu bisnis Anda tumbuh dengan landasan hukum yang kuat.",
+    "icon": "🏢",
+    "order": 3,
+    "published": true
+  },
+  {
+    "id": "svc-004",
+    "title": "Hukum Keluarga",
+    "slug": "hukum-keluarga",
+    "description": "Penanganan perkara keluarga meliputi perceraian, hak asuh anak, pembagian harta gono-gini, dan waris.",
+    "content": "Layanan hukum keluarga kami menangani permasalahan sensitif dengan pendekatan profesional dan empati:\n\n- Perceraian (cerai talak dan cerai gugat)\n- Hak asuh anak (hadhanah)\n- Pembagian harta bersama (gono-gini)\n- Sengketa waris dan pembagian warisan\n- Pengangkatan anak (adopsi)\n- Perjanjian pranikah (prenuptial agreement)\n- Dispensasi perkawinan\n- Isbat nikah\n\nKami memahami bahwa setiap perkara keluarga membutuhkan pendekatan yang berbeda dan sensitif.",
+    "icon": "👨‍👩‍👧‍👦",
+    "order": 4,
+    "published": true
+  },
+  {
+    "id": "svc-005",
+    "title": "Hukum Properti & Pertanahan",
+    "slug": "hukum-properti-pertanahan",
+    "description": "Penanganan sengketa tanah, jual beli properti, sertifikasi tanah, dan perizinan pembangunan.",
+    "content": "Layanan hukum properti dan pertanahan kami meliputi:\n\n- Sengketa kepemilikan tanah dan bangunan\n- Pengurusan sertifikat tanah (SHM, SHGB, SHP)\n- Pendampingan jual beli properti\n- Review perjanjian jual beli dan sewa menyewa\n- Perizinan Mendirikan Bangunan (IMB/PBG)\n- Sengketa batas tanah\n- Pembebasan lahan\n- PPJB dan AJB\n\nKami memastikan setiap transaksi properti Anda aman secara hukum.",
+    "icon": "🏠",
+    "order": 5,
+    "published": true
+  },
+  {
+    "id": "svc-006",
+    "title": "Hukum Ketenagakerjaan",
+    "slug": "hukum-ketenagakerjaan",
+    "description": "Pendampingan hukum terkait hubungan industrial, PHK, perselisihan kerja, dan hak-hak pekerja.",
+    "content": "Layanan hukum ketenagakerjaan kami mencakup:\n\n- Perselisihan hubungan industrial\n- Pemutusan Hubungan Kerja (PHK)\n- Penyusunan Perjanjian Kerja dan Peraturan Perusahaan\n- Pendampingan di Pengadilan Hubungan Industrial\n- Negosiasi bipartit dan mediasi tripartit\n- Hak-hak pekerja dan jaminan sosial\n- Outsourcing dan PKWT/PKWTT\n- Kecelakaan kerja dan kompensasi\n\nKami membela hak-hak pekerja maupun kepentingan perusahaan dengan adil dan profesional.",
+    "icon": "👷",
+    "order": 6,
+    "published": true
+  }
+]

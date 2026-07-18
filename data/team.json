@@ -1,0 +1,81 @@
+[
+  {
+    "id": "team-001",
+    "name": "GERI SH, MH",
+    "slug": "geri-sh-mh",
+    "position": "Managing Partner",
+    "specialization": "Hukum Pidana & Hukum Bisnis",
+    "bio": "GERI SH, MH adalah pendiri dan Managing Partner Kantor Hukum FIGE & Rekan. Dengan pengalaman lebih dari 15 tahun dalam praktik hukum, beliau telah menangani ratusan kasus di berbagai bidang hukum. Keahlian utamanya meliputi hukum pidana dan hukum bisnis korporasi. Beliau dikenal karena dedikasi tinggi, integritas, dan pendekatan strategis dalam menyelesaikan setiap perkara.",
+    "education": [
+      "S2 Magister Hukum - Universitas Indonesia",
+      "S1 Sarjana Hukum - Universitas Gadjah Mada"
+    ],
+    "experience": [
+      "Managing Partner - Kantor Hukum FIGE & Rekan (2010 - Sekarang)",
+      "Senior Associate - Kantor Hukum Besar Jakarta (2006 - 2010)",
+      "Advokat Muda - Lembaga Bantuan Hukum (2004 - 2006)"
+    ],
+    "image": "/images/team/geri.jpg",
+    "email": "geri@figerekan.co.id",
+    "order": 1,
+    "published": true
+  },
+  {
+    "id": "team-002",
+    "name": "Indira Permata SH",
+    "slug": "indira-permata",
+    "position": "Senior Partner",
+    "specialization": "Hukum Keluarga & Hukum Perdata",
+    "bio": "Indira Permata SH adalah Senior Partner yang memiliki spesialisasi di bidang hukum keluarga dan hukum perdata. Dengan pendekatan empatik dan profesional, beliau telah membantu banyak klien menyelesaikan permasalahan keluarga dengan solusi terbaik.",
+    "education": [
+      "S1 Sarjana Hukum - Universitas Padjadjaran"
+    ],
+    "experience": [
+      "Senior Partner - Kantor Hukum FIGE & Rekan (2012 - Sekarang)",
+      "Associate - Kantor Hukum Boutique Jakarta (2008 - 2012)"
+    ],
+    "image": "/images/team/indira.jpg",
+    "email": "indira@figerekan.co.id",
+    "order": 2,
+    "published": true
+  },
+  {
+    "id": "team-003",
+    "name": "Rizky Adi Pratama SH, MKn",
+    "slug": "rizky-adi-pratama",
+    "position": "Partner",
+    "specialization": "Hukum Properti & Pertanahan",
+    "bio": "Rizky Adi Pratama SH, MKn adalah Partner yang berfokus pada hukum properti, pertanahan, dan kenotariatan. Beliau memiliki pemahaman mendalam tentang regulasi pertanahan di Indonesia dan telah menangani berbagai transaksi properti bernilai tinggi.",
+    "education": [
+      "S2 Magister Kenotariatan - Universitas Diponegoro",
+      "S1 Sarjana Hukum - Universitas Airlangga"
+    ],
+    "experience": [
+      "Partner - Kantor Hukum FIGE & Rekan (2015 - Sekarang)",
+      "Notaris Magang - Kantor Notaris Jakarta (2012 - 2015)"
+    ],
+    "image": "/images/team/rizky.jpg",
+    "email": "rizky@figerekan.co.id",
+    "order": 3,
+    "published": true
+  },
+  {
+    "id": "team-004",
+    "name": "Siti Nurhaliza SH",
+    "slug": "siti-nurhaliza",
+    "position": "Associate",
+    "specialization": "Hukum Ketenagakerjaan & Hubungan Industrial",
+    "bio": "Siti Nurhaliza SH adalah Associate yang energik dan berdedikasi di bidang hukum ketenagakerjaan. Beliau memiliki passion dalam membela hak-hak pekerja dan memastikan keadilan dalam hubungan industrial.",
+    "education": [
+      "S1 Sarjana Hukum - Universitas Brawijaya"
+    ],
+    "experience": [
+      "Associate - Kantor Hukum FIGE & Rekan (2018 - Sekarang)",
+      "Paralegal - Serikat Pekerja Indonesia (2016 - 2018)"
+    ],
+    "image": "/images/team/siti.jpg",
+    "email": "siti@figerekan.co.id",
+    "order": 4,
+    "published": true
+  }
+]
