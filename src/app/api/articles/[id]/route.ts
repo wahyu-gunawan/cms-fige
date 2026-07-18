@@ -5,7 +5,7 @@ import { getArticleById, updateArticle, deleteArticle } from '@/lib/db';
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const article = getArticleById(id);
+    const article = await getArticleById(id);
     if (!article) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
@@ -27,7 +27,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const updates = await req.json();
     const now = new Date().toISOString();
     
-    const updated = updateArticle(id, { ...updates, updatedAt: now });
+    const updated = await updateArticle(id, { ...updates, updatedAt: now });
     if (!updated) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
@@ -47,7 +47,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     }
 
     const { id } = await params;
-    deleteArticle(id);
+    await deleteArticle(id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Failed to delete article:', error);

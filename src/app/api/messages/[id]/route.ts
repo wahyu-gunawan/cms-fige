@@ -12,7 +12,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const { id } = await params;
     const { read } = await req.json();
     if (read) {
-      markMessageAsRead(id);
+      await markMessageAsRead(id);
     }
     
     return NextResponse.json({ success: true });
@@ -30,7 +30,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     }
 
     const { id } = await params;
-    deleteMessage(id);
+    await deleteMessage(id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Failed to delete message:', error);

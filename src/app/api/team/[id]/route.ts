@@ -5,7 +5,7 @@ import { getTeamMemberById, updateTeamMember, deleteTeamMember } from '@/lib/db'
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const member = getTeamMemberById(id);
+    const member = await getTeamMemberById(id);
     if (!member) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
@@ -26,7 +26,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const { id } = await params;
     const updates = await req.json();
     
-    const updated = updateTeamMember(id, updates);
+    const updated = await updateTeamMember(id, updates);
     if (!updated) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
@@ -46,7 +46,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     }
 
     const { id } = await params;
-    deleteTeamMember(id);
+    await deleteTeamMember(id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Failed to delete team member:', error);

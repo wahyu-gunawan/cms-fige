@@ -5,7 +5,7 @@ import { getServiceById, updateService, deleteService } from '@/lib/db';
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const service = getServiceById(id);
+    const service = await getServiceById(id);
     if (!service) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
@@ -26,7 +26,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const { id } = await params;
     const updates = await req.json();
     
-    const updated = updateService(id, updates);
+    const updated = await updateService(id, updates);
     if (!updated) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
@@ -46,7 +46,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     }
 
     const { id } = await params;
-    deleteService(id);
+    await deleteService(id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Failed to delete service:', error);
