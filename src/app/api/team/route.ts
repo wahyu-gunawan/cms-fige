@@ -44,6 +44,7 @@ export async function POST(req: Request) {
       ...data,
       id,
       slug,
+      image: data.image || '',
       createdAt: now,
       updatedAt: now,
     };
